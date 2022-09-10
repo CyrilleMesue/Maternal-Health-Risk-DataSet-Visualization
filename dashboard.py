@@ -210,19 +210,19 @@ st.pyplot(d.fig)
 st.sidebar.info(
 """
 ### Information
-*Age:* Age in years when a woman is pregnant.  
+**Age:** Age in years when a woman is pregnant.  
 
-*SystolicBP:* Upper value of Blood Pressure in mmHg, another significant attribute during pregnancy.  
+**SystolicBP:** Upper value of Blood Pressure in mmHg, another significant attribute during pregnancy.  
 
-*DiastolicBP:* Lower value of Blood Pressure in mmHg, another significant attribute during pregnancy.  
+**DiastolicBP:** Lower value of Blood Pressure in mmHg, another significant attribute during pregnancy.  
 
-*BS:* Blood glucose levels is in terms of a molar concentration, mmol/L.  
+**BS:** Blood glucose levels is in terms of a molar concentration, mmol/L.  
 
-*HeartRate:* A normal resting heart rate in beats per minute.  
+**HeartRate:** A normal resting heart rate in beats per minute.  
 
-*Risk Level:* Predicted Risk Intensity Level during pregnancy considering the previous attribute.  
+**Risk Level:** Predicted Risk Intensity Level during pregnancy considering the previous attribute.  
 
-*Dataset Source:* https://www.kaggle.com/datasets/csafrit2/maternal-health-risk-data  
+**Dataset Source:** https://www.kaggle.com/datasets/csafrit2/maternal-health-risk-data  
 """
 )
 # END
