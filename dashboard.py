@@ -134,27 +134,22 @@ with c2:
         theta='Count',
         color='RiskLevel')
     
-pairs = [f"{pair[0]}, {pair[1]}" for pair in list(combinations(numeric_columns,2))]
-pair = st.sidebar.selectbox("Scatter Plots",pairs).split(", ")
-fig, ax = plt.subplots()
-fig.set_size_inches(10, 4)
-sns.scatterplot(data=data, x=pair[0], y=pair[1], hue="RiskLevel",style ="RiskLevel", legend='auto');
-c1.pyplot(fig)
+with c1:
+    pairs = [f"{pair[0]}, {pair[1]}" for pair in list(combinations(numeric_columns,2))]
+    pair = st.sidebar.selectbox("Scatter Plots",pairs).split(", ")
+    fig, ax = plt.subplots()
+    fig.set_size_inches(10, 4)
+    sns.scatterplot(data=data, x=pair[0], y=pair[1], hue="RiskLevel",style ="RiskLevel", legend='auto');
+    st.pyplot(fig)
     
     
 target_col = st.sidebar.radio("Histogram",numeric_columns)
-hist_data = []
-category_col = "RiskLevel"
 
-for group_label in group_labels:
-    hist_data.append(data[data[category_col] == group_label][target_col].values)
-
-# Create distplot with custom bin_size
-fig = ff.create_distplot(
-         hist_data, group_labels, bin_size=[1., 1., 1.])
-
-# Plot!
-st.plotly_chart(fig, use_container_width=True)
+d = sns.FacetGrid(data,hue="RiskLevel",height = 5, legend_out=False)
+d.map(sns.distplot,target_col, kde=True)
+d.add_legend();
+d.fig.set_size_inches(15, 6)
+st.pyplot(d.fig)
 # END
 #############################################################################################################################
 
@@ -214,15 +209,20 @@ st.plotly_chart(fig, use_container_width=True)
 # Page Info
 st.sidebar.info(
 """
-##### Context
-Age: Age in years when a woman is pregnant. 
-SystolicBP: Upper value of Blood Pressure in mmHg, another significant attribute during pregnancy. 
-DiastolicBP: Lower value of Blood Pressure in mmHg, another significant attribute during pregnancy. 
-BS: Blood glucose levels is in terms of a molar concentration, mmol/L. 
-HeartRate: A normal resting heart rate in beats per minute. 
-Risk Level: Predicted Risk Intensity Level during pregnancy considering the previous attribute. 
+### Information
+*Age:* Age in years when a woman is pregnant.  
 
-Dataset Source: https://www.kaggle.com/datasets/csafrit2/maternal-health-risk-data
+*SystolicBP:* Upper value of Blood Pressure in mmHg, another significant attribute during pregnancy.  
+
+*DiastolicBP:* Lower value of Blood Pressure in mmHg, another significant attribute during pregnancy.  
+
+*BS:* Blood glucose levels is in terms of a molar concentration, mmol/L.  
+
+*HeartRate:* A normal resting heart rate in beats per minute.  
+
+*Risk Level:* Predicted Risk Intensity Level during pregnancy considering the previous attribute.  
+
+*Dataset Source:* https://www.kaggle.com/datasets/csafrit2/maternal-health-risk-data  
 """
 )
 # END
